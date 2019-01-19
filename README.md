@@ -1,2 +1,2 @@
 # ArduinoProgram
-My Arduino program for my robotics classes
+My Arduino program for robotics classes
