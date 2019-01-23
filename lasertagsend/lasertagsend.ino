@@ -36,14 +36,13 @@ void loop() {
     {
         int physicalPinToRead=keyNumber+4;
         buttonState[keyNumber] = digitalRead(physicalPinToRead);
-        if (buttonState[keyNumber] != lastButtonState[keyNumber])
-        {
+       if (buttonState[keyNumber] != lastButtonState[keyNumber])
+       {
             if (buttonState[keyNumber] == LOW)
             {
                 irsend.sendSony(irKeyCodes[keyNumber], 32);
                 Serial.println("Sending");
-            }
+             }
             lastButtonState[keyNumber] = buttonState[keyNumber];
         }
-    }
-}
+    } }
