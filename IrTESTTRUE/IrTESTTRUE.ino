@@ -3,7 +3,7 @@
 #include <IRremoteInt.h>
 #include <ir_Lego_PF_BitStreamEncoder.h>
 
-int RECV_PIN = 2;
+int RECV_PIN = 8;
 IRrecv irrecv(RECV_PIN);
 decode_results results;
 

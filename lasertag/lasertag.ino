@@ -51,6 +51,7 @@ void loop() {
 
   if (irrecv.decode(&results))
   {
+    Serial.print(results.value);
     if (results.value == BUTTON_1)
     {
      digitalWrite(blueLED, LOW);
