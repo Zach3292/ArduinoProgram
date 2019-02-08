@@ -30,7 +30,7 @@ decode_results results;
 
 #define BUTTON_1 0x18E758A7
 #define BUTTON_2 0xFF18E7
-#define BUTTON_3 0xFF7A85
+#define BUTTON_3 0xFF02FD
 #define BUTTON_4 0xFF10EF
 #define BUTTON_5 0xFF38CF
 #define BUTTON_6 0xFF5AA5
@@ -104,6 +104,12 @@ void loop() {
       lcd.clear();
       digitalWrite(blueLED, HIGH);
     }
+     if (results.value == BUTTON_3)
+    {
+      while(results.value != BUTTON_3){
+  lcd.print("Deactivate");
+}
+    }
+    }
     irrecv.resume();
   }
-}
