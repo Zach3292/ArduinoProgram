@@ -84,7 +84,7 @@ void loop() {
       lcd.setCursor(0,0); // Column, line
       lcd.print("killed by");
       lcd.setCursor(0,1);
-      lcd.print("Gladiator");
+      lcd.print("Administrator");
       digitalWrite(redLED, HIGH);
       delay(500);
       digitalWrite(redLED, LOW);
