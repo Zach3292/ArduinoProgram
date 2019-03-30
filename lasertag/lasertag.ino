@@ -5,7 +5,7 @@
 
 int redLED = 12;
 int blueLED = 9;
-int RECV_PIN = 2;
+int RECV_PIN = 5;
 IRrecv irrecv(RECV_PIN);
 decode_results results;
 
@@ -17,11 +17,12 @@ void setup()
   pinMode(blueLED, OUTPUT);
   irrecv.enableIRIn();
   Serial.begin(9600);
+  digitalWrite(blueLED, HIGH);
 }
 void loop() {
 
-  if (irrecv.decode(&results))
-  {
+  if(irrecv.decode(&results)){
+  
     Serial.print(results.value, HEX);
     if (results.value == BUTTON_1)
     {
@@ -42,6 +43,7 @@ void loop() {
     else{
       Serial.print("Rien");
       }
-    }
+    
     irrecv.resume();
+  }
   }
