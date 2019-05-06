@@ -87,7 +87,7 @@ void ChangePalettePeriodically()
     
     if( lastSecond != secondHand) {
         lastSecond = secondHand;
-        if( secondHand == 0)  { currentPalette = RainbowColors_p;   currentBlending = LINEARBLEND; }
+        if( secondHand == 0)  { currentPalette = RainbowStripeColors_p;   currentBlending = LINEARBLEND; }
         if(buttonValue == LOW) { SetupPurpleAndGreenPalette();             currentBlending = LINEARBLEND; }
     }
 }
