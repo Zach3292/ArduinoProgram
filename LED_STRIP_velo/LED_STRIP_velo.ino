@@ -8,7 +8,7 @@
 CRGB leds[NUM_LEDS];
 
 #define UPDATES_PER_SECOND 100
-int buttonPin = 12;
+int buttonPin = 13;
 // This example shows several ways to set up and use 'palettes' of colors
 // with FastLED.
 //
