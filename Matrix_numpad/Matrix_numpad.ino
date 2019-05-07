@@ -3,7 +3,7 @@
 
 const byte ROWS = 4; 
 const byte COLS = 3; 
-
+int lol;
 char hexaKeys[ROWS][COLS] = {
   {'1', '2', '3'},
   {'4', '5', '6'},
@@ -45,7 +45,17 @@ byte gauche1b[] =
 };
 
 
-
+byte smiley1b[] =
+{ 
+  B00111100,
+  B01000010,
+  B10100101,
+  B10000001,
+  B10100101,
+  B10011001,
+  B01000010,
+  B00111100};
+  
 void setup()
 {
   lc.shutdown(0,false);  // Wake up displays
@@ -64,34 +74,41 @@ void sdroit1a()
   }
 }
 
-/*void sgauche1b()
+void sgauche1b()
 {
   for (int i = 0; i < 8; i++)
   {
     lc.setRow(0,i,gauche1b[i]);
   }
 }
+void ssmiley1b()
+{
+  for (int i = 0; i < 8; i++)
+  {
+    lc.setRow(0,i,smiley1b[i]);
+  }
+}
 
 
-*/
 void loop()
 {
  char customKey = customKeypad.getKey();
- 
- 
-   if (customKey="#"){
+ lol= customKey;
+ switch (lol) {
+  case 35:
     sdroit1a();
+    delay(2000); // statements
+    break;
+  case 42:
+    sgauche1b(); // statements
     delay(2000);
-    
-} else{
-    lc.clearDisplay(0);
+    break;
+  case 48:
+    ssmiley1b(); // statements
     delay(2000);
- }
-   
-    
-/*// Put #2 frame on both Display
-if (customKey="*"){
-    sgauche1b();
-    
-  } */
+    break;
+  default:
+     lc.clearDisplay(0);// statements
+    break;
+  }
 }
