@@ -1,4 +1,6 @@
 #include <FastLED.h>
+#include "LedControl.h"
+LedControl lc=LedControl(12,10,11,1);  // Pins: DIN,CLK,CS, # of Display connected
 
 #define LED_PIN     3
 #define NUM_LEDS    150
@@ -9,6 +11,42 @@ CRGB leds[NUM_LEDS];
 
 #define UPDATES_PER_SECOND 100
 int buttonPin = 13;
+byte droit1a[] =
+{
+   B00000000,  // First frame of invader #1
+   B00001000,
+   B00001100,
+   B11111110,
+   B11111111,
+   B11111110,
+   B00001100,
+   B00001000
+};
+
+byte gauche1b[] =
+{
+   B00000000,  // First frame of invader #1
+   B00010000,
+   B00110000,
+   B01111111,
+   B11111111,
+   B01111111,
+   B00110000,
+   B00010000
+};
+
+
+byte smiley1b[] =
+{ 
+  B00111100,
+  B01000010,
+  B10100101,
+  B10000001,
+  B10100101,
+  B10011001,
+  B01000010,
+  B00111100};
+  
 // This example shows several ways to set up and use 'palettes' of colors
 // with FastLED.
 //
@@ -36,6 +74,10 @@ extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
 
 
 void setup() {
+    lc.shutdown(0,false);  // Wake up displays
+    lc.setIntensity(0,5);  // Set intensity levels
+    lc.clearDisplay(0);  // Clear Displays
+    Serial.begin(9600);
     pinMode(buttonPin, INPUT_PULLUP);
     delay( 3000 ); // power-up safety delay
     FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
@@ -59,6 +101,29 @@ void loop()
     FastLED.show();
     FastLED.delay(1000 / UPDATES_PER_SECOND);
 }
+void sdroit1a()
+{
+  for (int i = 0; i < 8; i++)  
+  {
+    lc.setRow(0,i,droit1a[i]);
+  }
+}
+
+void sgauche1b()
+{
+  for (int i = 0; i < 8; i++)
+  {
+    lc.setRow(0,i,gauche1b[i]);
+  }
+}
+void ssmiley1b()
+{
+  for (int i = 0; i < 8; i++)
+  {
+    lc.setRow(0,i,smiley1b[i]);
+  }
+}
+
 
 void FillLEDsFromPaletteColors( uint8_t colorIndex)
 {
@@ -87,8 +152,8 @@ void ChangePalettePeriodically()
     
     if( lastSecond != secondHand) {
         lastSecond = secondHand;
-        if( secondHand == 0)  { currentPalette = RainbowStripeColors_p;   currentBlending = LINEARBLEND; }
-        if(buttonValue == LOW) { SetupPurpleAndGreenPalette();             currentBlending = LINEARBLEND; }
+        if( secondHand == 0)  { currentPalette = RainbowStripeColors_p; ssmiley1b();  currentBlending = LINEARBLEND;  }
+        if(buttonValue == LOW) { SetupPurpleAndGreenPalette();   sdroit1a();          currentBlending = LINEARBLEND; }
     }
 }
 
