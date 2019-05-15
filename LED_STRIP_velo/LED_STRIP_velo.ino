@@ -11,6 +11,7 @@ CRGB leds[NUM_LEDS];
 
 #define UPDATES_PER_SECOND 100
 int buttonPin = 13;
+int buttonPindeux = 9;
 byte droit1a[] =
 {
    B00000000,  // First frame of invader #1
@@ -79,6 +80,7 @@ void setup() {
     lc.clearDisplay(0);  // Clear Displays
     Serial.begin(9600);
     pinMode(buttonPin, INPUT_PULLUP);
+    pinMode(buttonPindeux, INPUT_PULLUP);
     delay( 3000 ); // power-up safety delay
     FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
     FastLED.setBrightness(  BRIGHTNESS );
@@ -147,14 +149,12 @@ void FillLEDsFromPaletteColors( uint8_t colorIndex)
 void ChangePalettePeriodically()
 {
     int buttonValue = digitalRead(buttonPin);
-    uint8_t secondHand = (millis() / 1000) % 5;
-    static uint8_t lastSecond = 20;
+     int buttonValuedeux = digitalRead(buttonPindeux);
     
-    if( lastSecond != secondHand) {
-        lastSecond = secondHand;
-        if( secondHand == 0)  { currentPalette = RainbowStripeColors_p; ssmiley1b();  currentBlending = LINEARBLEND;  }
         if(buttonValue == LOW) { SetupPurpleAndGreenPalette();   sdroit1a();          currentBlending = LINEARBLEND; }
-    }
+        else if (buttonValuedeux == LOW) { SetupPurpleAndGreenPalette();   sgauche1b();          currentBlending = LINEARBLEND; }  
+        else { currentPalette = RainbowStripeColors_p; ssmiley1b();  currentBlending = LINEARBLEND;  }
+  
 }
 
 // This function fills the palette with totally random colors.
@@ -243,4 +243,4 @@ const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM =
 // So for example, if you set the first two explicit entries of a compact 
 // palette to Green (0,255,0) and Blue (0,0,255), and then retrieved 
 // the first sixteen entries from the virtual palette (of 256), you'd get
-// Green, followed by a smooth gradient from green-to-blue, and then Blue.
+// Green, followed by a smooth gradient from green-to-blue, and then Blue.© 2019 GitHub, Inc.
