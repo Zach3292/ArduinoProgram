@@ -10,8 +10,8 @@ LedControl lc=LedControl(12,10,11,1);  // Pins: DIN,CLK,CS, # of Display connect
 CRGB leds[NUM_LEDS];
 
 #define UPDATES_PER_SECOND 100
-int buttonPin = 13;
-int buttonPindeux = 9;
+int buttonPin = A0;
+
 byte droit1a[] =
 {
    B00000000,  // First frame of invader #1
@@ -79,8 +79,7 @@ void setup() {
     lc.setIntensity(0,5);  // Set intensity levels
     lc.clearDisplay(0);  // Clear Displays
     Serial.begin(9600);
-    pinMode(buttonPin, INPUT_PULLUP);
-    pinMode(buttonPindeux, INPUT_PULLUP);
+    
     delay( 3000 ); // power-up safety delay
     FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
     FastLED.setBrightness(  BRIGHTNESS );
@@ -92,6 +91,7 @@ void setup() {
 
 void loop()
 {
+ 
    
     ChangePalettePeriodically();
     
@@ -148,11 +148,11 @@ void FillLEDsFromPaletteColors( uint8_t colorIndex)
 
 void ChangePalettePeriodically()
 {
-    int buttonValue = digitalRead(buttonPin);
-     int buttonValuedeux = digitalRead(buttonPindeux);
-    
-        if(buttonValue == LOW) { SetupPurpleAndGreenPalette();   sdroit1a();          currentBlending = LINEARBLEND; }
-        else if (buttonValuedeux == LOW) { SetupPurpleAndGreenPalette();   sgauche1b();          currentBlending = LINEARBLEND; }  
+   
+      int buttonValue = analogRead(buttonPin);
+    Serial.println(buttonValue);
+        if(buttonValue >= 712 ) { SetupPurpleAndGreenPalette();   sdroit1a();          currentBlending = LINEARBLEND; }
+        else if (buttonValue <= 312) { SetupPurpleAndGreenPalette();   sgauche1b();          currentBlending = LINEARBLEND; }  
         else { currentPalette = RainbowStripeColors_p; ssmiley1b();  currentBlending = LINEARBLEND;  }
   
 }
