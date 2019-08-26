@@ -110,7 +110,7 @@ void setup()
 
 
 //  Take values in Arrays and Display them
-void basiceye()
+void basiceye_void()
 {
   for (int i = 0; i < 8; i++)  
   {
