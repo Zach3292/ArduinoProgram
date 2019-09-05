@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/zacharie/arduino-1.8.9/tools/**",
+                "/home/zacharie/arduino-1.8.9/hardware/arduino/avr/**",
+                "/home/zacharie/Arduino/libraries/LedControl/**"
+            ],
+            "forcedInclude": [
+                "/home/zacharie/arduino-1.8.9/hardware/arduino/avr/cores/arduino/Arduino.h"
+            ],
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
