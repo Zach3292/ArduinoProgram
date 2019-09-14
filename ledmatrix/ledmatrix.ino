@@ -3,9 +3,12 @@
 
 const int trigPin = 5;
 const int echoPin = 6;
+const int joystickPin = A0;
+
 
 long duration;
 int distance;
+int joystickValue;
 
 LedControl lc=LedControl(12,10,11,1);  // Pins: DIN,CLK,CS, # of Display connected
 
@@ -72,6 +75,7 @@ void setup()
   lc.clearDisplay(0);  // Clear Displays
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+  pinMode(joystickPin, INPUT);
   Serial.begin(9600);
 }
 
@@ -117,12 +121,43 @@ void middle_right_eye_void()
   }
 }
 
+void print_eye(int eye_number)
+{
+  switch (eye_number)
+  {
+  case 0:
+    left_eye_void();
+    break;
+  case 1:
+    middle_left_eye_void();
+    break;
+  case 2:
+    basic_eye_void();
+    break;
+  case 3:
+    middle_right_eye_void();
+    break;
+  case 4:
+    right_eye_void();
+    break;
 
+  default:
+  
+    break;
+  }
+}
 void loop()
 {
 
+    joystickValue = analogRead(joystickPin);
+    int joystickValueMap = map(joystickValue, 0, 1020, 0, 4);
+
+    Serial.println(joystickValueMap);
+
+    print_eye(joystickValueMap);
     
-    digitalWrite(trigPin, LOW);
+    
+    /*digitalWrite(trigPin, LOW);
     delayMicroseconds(2);
     // Sets the trigPin on HIGH state for 10 micro seconds
     digitalWrite(trigPin, HIGH);
@@ -154,6 +189,7 @@ void loop()
       break; 
     
     default:
+    
       break;
-    }
+    }*/
   }
