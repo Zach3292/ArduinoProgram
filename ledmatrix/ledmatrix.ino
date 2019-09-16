@@ -146,6 +146,22 @@ void loop()
 
     Serial.println(joystickValueMap);
 
-    print_eye(joystickValueMap);
-    
+    //print_eye(joystickValueMap);
+    print_eye(0);
+    delay(100);
+    print_eye(1);
+    delay(100);
+    print_eye(2);
+    delay(100);
+    print_eye(3);
+    delay(100);
+    print_eye(4);
+    delay(100);
+    print_eye(3);
+    delay(100);
+    print_eye(2);
+    delay(100);
+    print_eye(1);
+    delay(100);
+
   }
