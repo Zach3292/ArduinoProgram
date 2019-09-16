@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:uno",
     "programmer": "AVRISP mkII",
-    "sketch": "Led-Strip_ultrasonic/Led-Strip_ultrasonic.ino",
+    "sketch": "ledmatrix/ledmatrix.ino",
     "port": "/dev/ttyACM0"
 }

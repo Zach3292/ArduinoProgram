@@ -150,7 +150,7 @@ void loop()
 {
 
     joystickValue = analogRead(joystickPin);
-    int joystickValueMap = map(joystickValue, 0, 1020, 0, 4);
+    int joystickValueMap = map(joystickValue, 0, 1023, 0, 4);
 
     Serial.println(joystickValueMap);
 
