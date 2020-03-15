@@ -6,14 +6,13 @@ CRGB leds[NUM_LEDS];
 #define LED_PIN 3
 
    int startindex = 0;   
-   int bright = 64;
+   int bright = 40;
    int speedw = 3;
    int barlength = 1;
-   String current;
-   int RECV_PIN = 11;
+   String text = "";
    
 CRGBPalette16 currentPalette;
-TBlendType    currentBlending;
+TBlendType currentBlending;
 
 
 void setup() {
@@ -21,74 +20,67 @@ void setup() {
    FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
    FastLED.setBrightness(bright);
    BlackPalette();
-   current = (" Rainbow ");
    currentBlending = LINEARBLEND;
-   Serial.begin (9600);
-  Serial.setTimeout(50);
-
-   
+   Serial.begin(9600);
 }
 
 void loop()
 {
-  
    FillLEDsFromPaletteColors(startindex); //Fills the LED array
    startindex = startindex + speedw; //Controls the speed of pattern
    changePalette();//Changes the pattern colors
-   ShowLED ();  //Displays the LED array
+   ShowLED();  //Displays the LED array
    
 }   
 
 void changePalette() { //Changes pattern color based on IR signal
-  String text = Serial.readString();
-  if(text.length() > 0){
-   if (text=="Cyan") {
-    CyanPalette();
-     current = "Cyan";
-   }
-    if (text=="Blue") {
-    BluePalette();
-     current = "Blue";
-   }
-
-   if (text=="Green") {
-    GreenPalette();
-     current = "Green";
-   }
-    if (text=="Yellow") {
-    YellowPalette();
-     current = "Yellow";
-   }
-    if (text=="Orange") {
-    OrangePalette();
-     current = "Orange";
-   }
-    if (text=="Red") {
-    RedPalette();
-     current = "Red";
-   }
-    if (text=="Pink") {
-    PinkPalette();
-     current = "Pink";
-   }
-   if (text=="Purple") {
-    PurplePalette();
-     current = "Purple";
-   }
-    if (text=="Black") {
-    BlackPalette();
-     current = "Black";
-   }
-    if (text=="White") {
-      WhitePalette();
-      current = "White";
-   }
+  
     
- }
+    if(Serial.available()){
+        while(text ==""){
+          delay(10);
+          text = Serial.readString();
+          text.trim();
+        }
+        
+      
+     if (text == "Cyan") {
+      CyanPalette();
+      Serial.println("Cyan");
+     }else if (text == "Blue") {
+      BluePalette();
+       Serial.println("Blue");
+     }else if (text == "Green") {
+      GreenPalette();
+      Serial.println("Green");
+     }else if (text == "Yellow") {
+      YellowPalette();
+      Serial.println("Yellow");
+     }else if (text == "Orange") {
+      OrangePalette();
+      Serial.println("Orange");
+     }else if (text == "Red") {
+      RedPalette();
+      Serial.println("Red");
+     }else if (text == "Pink") {
+      PinkPalette();
+      Serial.println("Pink");
+     }else if (text == "Purple") {
+      PurplePalette();
+      Serial.println("Purple");
+     }else if (text == "Black") {
+      BlackPalette();
+      Serial.println("Black");
+     }else if (text == "White") {
+        WhitePalette();
+      Serial.println("White");
+     }
+      text = "";
+   }
+  
 }
 
-
-void ShowLED (){  //Displays the current pattern
+void ShowLED(){  //Displays the current pattern
    FastLED.setBrightness( bright ); //Controls brightness globally
    FastLED.show();
 }
