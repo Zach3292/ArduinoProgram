@@ -79,6 +79,10 @@ void changePalette() { //Changes pattern color based on IR signal
     BlackPalette();
      current = "Black";
    }
+    if (text=="White") {
+      WhitePalette();
+      current = "White";
+   }
     
  }
 }
@@ -152,5 +156,11 @@ void BlackPalette()
 {
    // 'black out' all 16 palette entries...
    fill_solid( currentPalette, 16, CRGB::Black);
+   
+}
+void WhitePalette()
+{
+   // 'black out' all 16 palette entries...
+   fill_solid( currentPalette, 16, CRGB::White);
    
 }
